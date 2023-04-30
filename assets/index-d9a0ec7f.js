@@ -205,7 +205,7 @@ Error generating stack: `+o.message+`
   & p {
     font-size: 1em;
   }
-`,LC=()=>{const[e,t]=Js(r=>[r.todos,r.filter]),n=T.useMemo(()=>{switch(t){case"active":return e.filter(r=>!r.completed);case"completed":return e.filter(r=>r.completed);default:return e}},[t]);return J.jsx(RC,{children:J.jsx(Bk,{mode:"sync",children:n.map(r=>J.jsx(AC,{...r},r.id))})})},DC=Ge.div`
+`,LC=()=>{const[e,t]=Js(r=>[r.todos,r.filter]),n=T.useMemo(()=>{switch(t){case"active":return e.filter(r=>!r.completed);case"completed":return e.filter(r=>r.completed);default:return e}},[t,e]);return J.jsx(RC,{children:J.jsx(Bk,{mode:"sync",children:n.map(r=>J.jsx(AC,{...r},r.id))})})},DC=Ge.div`
   width: 100%;
   height: max-content;
   background: white;
