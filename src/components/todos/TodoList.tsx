@@ -46,7 +46,7 @@ const TodoList = () => {
       default:
         return todos
     }
-  }, [filter])
+  }, [filter, todos])
 
   return (
     <Container>

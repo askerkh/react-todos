@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useTodos } from "../store"
-import { forwardRef, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 const Container = styled(motion.div)`
   width: 80%;
