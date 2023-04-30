@@ -9,15 +9,17 @@ const Container = styled.ul`
   &::-webkit-scrollbar {
     width: 0;
   }
+  height: max-content;
   padding: 0 1rem;
+  flex-grow: 1;
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
   color: white;
   font-size: 1.6rem;
+
   & h1 {
     font-size: 2.5em;
   }

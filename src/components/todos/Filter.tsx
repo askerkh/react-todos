@@ -1,11 +1,12 @@
 import { motion } from "framer-motion"
 import { nanoid } from "nanoid"
+import { useState } from "react"
 import styled from "styled-components"
 import { useTodos } from "../store"
 
 const Container = styled.div`
   width: 100%;
-  height: max-content;
+  height: 5rem;
   background: white;
   color: black;
   padding: 0.5rem 1rem;
@@ -16,6 +17,8 @@ const Container = styled.div`
   display: flex;
   justify-content: space-evenly;
   gap: 1rem;
+  position: relative;
+  bottom: 0;
 `
 
 const Button = styled(motion.button)`
@@ -48,18 +51,26 @@ const btnList: { title: string; filter: string }[] = [
 ]
 
 const Filter: React.FC = () => {
-  const [todoFilter, setFilter] = useTodos((s) => [s.filter, s.setFilter])
+  const [listFilter, setListFilter] = useState("")
+  const setFilter = useTodos((s) => s.setFilter)
 
   const handleSetFilter = (newFilter: string) => {
-    setFilter(newFilter)
+    setListFilter(() => {
+      setFilter(newFilter)
+      return newFilter
+    })
   }
 
   return (
     <Container>
-      {btnList.map(({ title, filter: f }) => {
+      {btnList.map(({ title, filter }) => {
         return (
-          <Button onClick={() => handleSetFilter(f)} key={f} type="button">
-            {todoFilter === f ? <ActiveCircle /> : null}
+          <Button
+            onClick={() => handleSetFilter(filter)}
+            key={filter}
+            type="button"
+          >
+            {listFilter === filter ? <ActiveCircle /> : null}
             {title}
           </Button>
         )
@@ -74,7 +85,7 @@ const Circle = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: transparent;
-  border: 1px solid #0cf;
+  border: 1px solid #00f;
   border-radius: 100%;
   position: absolute;
   top: 0;

@@ -43,10 +43,6 @@ const Buttons = styled.div`
   display: flex;
   width: max-content;
   gap: 0.5rem;
-
-  & .pencil {
-    transform: scale(-1, 1);
-  }
 `
 
 const Button = styled(motion.button)`
@@ -155,6 +151,7 @@ const TodoItem: React.FC<ITodo> = ({ id, title, completed, icon }) => {
                 inputRef.current?.focus()
               }, 4)
             }}
+            initial={{ transform: "scale(-1, 1)" }}
             animate={{ display: isEditing ? "none" : "block", opacity: [0, 1] }}
             whileTap={{ scale: 1.1 }}
             transition={{ duration: 0.05 }}
