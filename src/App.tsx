@@ -50,7 +50,12 @@ const Container = styled(motion.div)`
 const App = () => {
   return (
     <Container>
-      <h1>Todos</h1>
+      <motion.h1
+        animate={{ y: [-200, 0] }}
+        transition={{ duration: 0.5, delay: 0.5 }}
+      >
+        Todos
+      </motion.h1>
       <TodoAdd />
       <TodoList />
       <Filter />

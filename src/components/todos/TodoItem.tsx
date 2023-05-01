@@ -97,7 +97,6 @@ const Li = styled(Reorder.Item)`
 
 const TodoItem: React.FC<{ todo: ITodo }> = ({ todo }) => {
   const { id, title, completed, icon } = todo
-
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [deleteTodo, toggleTodo, editTodo] = useTodos((state) => [
@@ -121,6 +120,11 @@ const TodoItem: React.FC<{ todo: ITodo }> = ({ todo }) => {
     <Li
       value={todo}
       animate={{ x: [-200, 0], opacity: [0, 1] }}
+      whileInView={{
+        x: [-200, 0],
+        opacity: [0, 1],
+        transition: { duration: 0.2 },
+      }}
       exit={{ x: 200, opacity: 0 }}
       transition={{ duration: 0.2 }}
     >

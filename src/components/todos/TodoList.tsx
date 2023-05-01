@@ -56,7 +56,7 @@ const TodoList = () => {
 
   return (
     <Container onReorder={setTodos} axis="y" values={todos}>
-      <AnimatePresence mode="sync">
+      <AnimatePresence initial={false} mode="sync">
         {filteredTodos.map((t) => {
           return <TodoItem key={t.id} todo={t} />
         })}
