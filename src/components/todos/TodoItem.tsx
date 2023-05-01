@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { Reorder, motion } from "framer-motion"
 import styled from "styled-components"
 import { ITodo, useTodos } from "../store"
 import { useEffect, useRef, useState } from "react"
@@ -58,6 +58,7 @@ const Button = styled(motion.button)`
   border: 1px solid #ccc;
   border-radius: 0.75em;
   box-shadow: 0rem 0.25rem 0.25rem #eee;
+  transform: scale(-1, 1);
 `
 
 const Title = styled(motion.p)`
@@ -69,7 +70,7 @@ const Title = styled(motion.p)`
   color: #000;
 `
 
-const Li = styled(motion.li)`
+const Li = styled(Reorder.Item)`
   font-size: 1rem;
   display: flex;
   gap: 1rem;
@@ -94,7 +95,9 @@ const Li = styled(motion.li)`
   }
 `
 
-const TodoItem: React.FC<ITodo> = ({ id, title, completed, icon }) => {
+const TodoItem: React.FC<{ todo: ITodo }> = ({ todo }) => {
+  const { id, title, completed, icon } = todo
+
   const [isEditing, setIsEditing] = useState(false)
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [deleteTodo, toggleTodo, editTodo] = useTodos((state) => [
@@ -116,6 +119,7 @@ const TodoItem: React.FC<ITodo> = ({ id, title, completed, icon }) => {
 
   return (
     <Li
+      value={todo}
       animate={{ x: [-200, 0], opacity: [0, 1] }}
       exit={{ x: 200, opacity: 0 }}
       transition={{ duration: 0.2 }}

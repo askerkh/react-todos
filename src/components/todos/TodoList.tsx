@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import TodoItem from "./TodoItem"
 import { useTodos } from "../store"
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence, Reorder } from "framer-motion"
 import { useMemo } from "react"
 
-const Container = styled.ul`
+const Container = styled(Reorder.Group)`
   overflow-y: scroll;
   &::-webkit-scrollbar {
     width: 0;
@@ -37,24 +37,28 @@ const Container = styled.ul`
 `
 
 const TodoList = () => {
-  const [todos, filter] = useTodos((s) => [s.todos, s.filter])
+  const [todos, filter, setTodos] = useTodos((s) => [
+    s.todos,
+    s.filter,
+    s.setTodos,
+  ])
 
   const filteredTodos = useMemo(() => {
     switch (filter) {
-      case "active":
-        return todos.filter((t) => !t.completed)
       case "completed":
         return todos.filter((t) => t.completed)
+      case "active":
+        return todos.filter((t) => !t.completed)
       default:
         return todos
     }
-  }, [filter, todos])
+  }, [todos, filter])
 
   return (
-    <Container>
+    <Container onReorder={setTodos} axis="y" values={todos}>
       <AnimatePresence mode="sync">
         {filteredTodos.map((t) => {
-          return <TodoItem key={t.id} {...t} />
+          return <TodoItem key={t.id} todo={t} />
         })}
       </AnimatePresence>
     </Container>

@@ -11,6 +11,8 @@ export interface ITodo {
 
 interface ITodoStore {
   todos: ITodo[]
+  filteredTodos: ITodo[]
+  setTodos: (t: ITodo[]) => void
   add: (title: string) => void
   delete: (id: string) => void
   toggle: (id: string) => void
@@ -35,8 +37,12 @@ const icons: string[] = [
 export const useTodos = create(
   persist<ITodoStore>(
     (set): ITodoStore => ({
-      filter: "",
       todos: [],
+      setTodos(t) {
+        set(() => ({ todos: t }))
+      },
+      filter: "",
+      filteredTodos: [],
       setFilter(filter) {
         set(() => ({
           filter,
